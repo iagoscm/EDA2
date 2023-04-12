@@ -1,31 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(){
+int main() {
+    int n, cod, nota, dia = 1;
 
-    int n, cod, nota, codtemp, notatemp, dia = 1, i = 0;
+    while (scanf("%d", &n) == 1) {
+        int maior_nota = -1, menor_cod = 1e9, cod_maior_nota = 1e9;
 
-    for( ; ; ){
-        scanf("%d", &n);
-        printf("%d\n", n);
-        if(n > 200 || n < 1)
-            break;
-        printf("%d\n", n);
-        cod = 0;
-        nota = 0;
-        for( ; ; ){
-            printf("i = %d\n", i);
-            scanf("%d %d", &codtemp, &notatemp);
-            if(notatemp > nota){
-                cod = codtemp;
-                nota = notatemp;
+        for (int i = 0; i < n; i++) {
+            scanf("%d%d", &cod, &nota);
+
+            if (nota > maior_nota || (nota == maior_nota && cod < menor_cod)) {
+                maior_nota = nota;
+                menor_cod = cod;
             }
-            printf("%d", i);
         }
-        printf("Dia %d", dia);
+
+        printf("Dia %d\n%d\n\n", dia, menor_cod);
         dia++;
     }
 
     return 0;
-
 }
