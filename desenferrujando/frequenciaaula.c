@@ -1,63 +1,36 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdbool.h>
 
-typedef struct node {
-    int num;
-    int count;
-    struct node *next;
-} Node;
+#define MAX_N 1000001 // limite superior para N
+#define MAX_ID 1000001 // limite superior para o número de registro
+
+bool present[MAX_ID]; // vetor para armazenar se um aluno está presente ou não
 
 int main() {
-    int n;
+    int n, id;
     scanf("%d", &n);
 
-    // Inicializa a lista vazia
-    Node *head = NULL;
-
-    // Lê os números de registro e atualiza a lista
-    for (int i = 0; i < n; i++) {
-        int num;
-        scanf("%d", &num);
-
-        // Procura na lista pelo número de registro
-        Node *node = head;
-        while (node != NULL && node->num != num) {
-            node = node->next;
-        }
-
-        if (node == NULL) {
-            // Se o número de registro não foi encontrado na lista, adiciona um novo elemento
-            node = (Node *) malloc(sizeof(Node));
-            node->num = num;
-            node->count = 1;
-            node->next = head;
-            head = node;
-        } else {
-            // Se o número de registro já foi encontrado na lista, incrementa a contagem
-            node->count++;
-        }
+    // inicializa todos os alunos como ausentes
+    for (int i = 0; i < MAX_ID; i++) {
+        present[i] = false;
     }
 
-    // Conta quantos elementos da lista têm contagem maior do que zero
+    // verifica se o aluno está presente na aula
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &id);
+        present[id] = true;
+    }
+
+    // conta quantos alunos estão presentes na aula
     int count = 0;
-    Node *node = head;
-    while (node != NULL) {
-        if (node->count > 0) {
+    for (int i = 0; i < MAX_ID; i++) {
+        if (present[i]) {
             count++;
         }
-        node = node->next;
     }
 
-    // Imprime o resultado
+    // imprime o resultado
     printf("%d\n", count);
-
-    // Libera a memória usada pela lista
-    node = head;
-    while (node != NULL) {
-        Node *next = node->next;
-        free(node);
-        node = next;
-    }
 
     return 0;
 }
