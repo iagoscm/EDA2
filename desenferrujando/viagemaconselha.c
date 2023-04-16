@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define MAX_SIZE 100
+
 int main() {
     int n, cod, nota, dia = 1;
 
